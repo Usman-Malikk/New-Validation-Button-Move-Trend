@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', sans-serif;
+      }
+      .formcont {
+        display: flex;
+        width: 100%;
+        height: 90vh;
+        justify-content: center;
+        align-items: center;
+      
+      }
+    
+      form {
+        width: 400px;
+        padding: 10px;
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+        /* align-items: center; */
+        justify-content: center;
+      }
+      input {
+        padding: 10px;
+        width: 100%;
+        outline: none;
+
+       
+      }
+      .success {
+        border: 2px solid rgb(0, 153, 255);
+        background-color: rgba(0, 153, 255, 0.095);
+      }
+
+      .fail
+      {
+        border: 2px solid rgb(255, 0, 0);
+        background-color: rgba(255, 0, 0, 0.095);
+      }
+      #sbtn {
+        width: 200px;
+        position: absolute;
+        
+        padding: 10px;
+        top: 20px;
+        border-radius: 5px;
+        font-weight: bolder;
+        transition: .5s ease-in-out;
+      }
+      .sbtnsuci
+      {
+        border: 2px solid rgb(0, 255, 85);
+        background-color: rgba(34, 255, 0, 0.095);
+      }
+    
+      label
+      {
+        position: relative;
+        font-weight: bolder;
+      }
+      .btncont
+      {
+        display: flex;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        /* padding: 20px; */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="formcont">
+      <form onsubmit="norefresh(event)" action="">
+        <label for="name">Name</label>
+        <input type="text" placeholder="name" id="name" />
+        <label for="password">Password</label>
+        <input
+          type="password"
+          placeholder="enter your password"
+          id="password"/>
+        <div class="btncont">
+            <button type="submit" onmouseenter="checkvalid(event)"  id="sbtn">Submit</button>
+        </div>
+      </form>
+    </div>
+  </body>
+
+  <script>
+    // variables
+
+let button = document.getElementById("sbtn")
+let name = document.getElementById("name")
+let password = document.getElementById("password")
+var truue = true; 
+
+// Move BUTTON
+
+let movebtn=(overvalue,movet,flag) =>
+{
+if(flag)
+{
+    button.style.cursor = "default"
+    button.style.transform = `translateX(0px)`
+        button.classList.add("sbtnsuci")
+        console.log("hellooo prople")
+}
+else
+{
+    button.classList.remove("sbtnsuci")
+    console.log("heli")
+    button.style.cursor = "not-allowed"
+    if (overvalue<837)
+    {
+        button.style.transform = `translateX(${movet}px)`
+        button.classList.add("fail")
+        console.log()
+    }
+
+    else 
+    {
+        button.style.transform = `translateX(-${movet}px)`
+        button.classList.add("fail")
+        console.log()
+    }
+}
+}
+// Check Validation
+let checkthecondition= ()=>
+{
+    let suman =  name.value.split("")
+    
+   
+if(name.value.length>=3 && password.value.length>=3 )
+{
+    
+    password.classList.remove("fail")
+    name.classList.remove("fail")
+    name.classList.add("success")
+    password.classList.add("success")
+    return true
+   
+}
+else{
+    // console.log(suman.length)
+    console.log(name.value.length,password.value.length)
+    name.classList.add("fail")
+    password.classList.add("fail")
+    return false
+}
+}
+
+let checkvalid=(e)=>
+{
+let status =  checkthecondition()
+console.log(status)
+movebtn(e.clientX,200,status)
+}
+let norefresh=(e)=>
+{
+e.preventDefault()
+console.log("form submit")
+}
+
+  </script>
+</html>
